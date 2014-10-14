@@ -1,8 +1,14 @@
 @import "menu-left";
 
+@-webkit-keyframes bgloop {
+  from {background-position: 0px 0%;}
+  to {background-position: 1920px 0%;}
+}
+
 .page--main-page__content {
-  background: url("../images/bg_recursive.png") center;
-  background-size: auto 100%;
+  background: url("../images/bg_recursive.png");
+  -webkit-animation: bgloop 15s linear infinite;
+  background-size: 1920px 100%;
   .user-head {
     width: 100px;
     height: 100px;
@@ -29,6 +35,7 @@
     background: none;
     color: #777;
   }
+
   .main-bottom-link {
     background: rgba(255, 255, 255, 0.4);
     border-top: solid 1px rgba(200, 200, 200, 0.5);

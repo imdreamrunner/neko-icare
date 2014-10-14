@@ -45,9 +45,18 @@
 .bottom-menu-item:active {
   background-color: rgba(255, 255, 255, 0.1);
 }
+@-webkit-keyframes bgloop {
+  from {
+    background-position: 0px 0%;
+  }
+  to {
+    background-position: 1920px 0%;
+  }
+}
 .page--main-page__content {
-  background: url("../images/bg_recursive.png") center;
-  background-size: auto 100%;
+  background: url("../images/bg_recursive.png");
+  -webkit-animation: bgloop 15s linear infinite;
+  background-size: 1920px 100%;
 }
 .page--main-page__content .user-head {
   width: 100px;
