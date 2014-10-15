@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <title>My App</title>
+    <title>iCare App</title>
 
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
@@ -39,11 +39,11 @@
                 Kudo Shinichi
                 <div class="notification menu-notification">3</div>
             </ons-list-item>
-            <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('login.html', {closeMenu: true})">
+            <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('main.html', {closeMenu: true})">
                 Ran Mouri
             </ons-list-item>
 
-            <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('login.html', {closeMenu: true})">
+            <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('main.html', {closeMenu: true})">
                 Kogoro Mouri
             </ons-list-item>
         </ons-list>
@@ -125,12 +125,33 @@
 <ons-template id="record.html">
     <ons-page>
         <ons-toolbar>
+            <div class="left"><ons-back-button>Back</ons-back-button></div>
             <div class="center">Record</div>
         </ons-toolbar>
 
+
+        <ons-list ng-controller="MasterController">
+            <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
+                <ons-row>
+                    <ons-col width="60px">
+                        <div class="item-thum"></div>
+                    </ons-col>
+                    <ons-col>
+                        <header>
+                            <span class="item-title">{{item.title}}</span>
+                            <span class="item-label">{{item.label}}</span>
+                        </header>
+                        <p class="item-desc">{{item.desc}}</p>
+                    </ons-col>
+                </ons-row>
+            </ons-list-item>
+        </ons-list>
+
+        <!--
         <p style="text-align: center">
             <ons-button modifier="light" ng-click="navi.popPage();">Pop</ons-button>
         </p>
+        -->
     </ons-page>
 </ons-template>
 
@@ -140,9 +161,26 @@
             <div class="center">Calendar</div>
         </ons-toolbar>
 
+
         <p style="text-align: center">
-            <ons-button modifier="light" ng-click="navi.popPage();">Pop</ons-button>
+            <img src="images/calendar.png" />
         </p>
+        <!--
+        <div class="calendar">
+            <div class="header">S</div>
+            <div class="header">M</div>
+            <div class="header">T</div>
+            <div class="header">W</div>
+            <div class="header">T</div>
+            <div class="header">F</div>
+            <div class="header">S</div>
+        </div>
+        -->
+
+        <p style="text-align: center">
+            <ons-button modifier="light" ng-click="navi.popPage();">Set Reminder</ons-button>
+        </p>
+
     </ons-page>
 </ons-template>
 
@@ -152,8 +190,25 @@
             <div class="center">Appointment</div>
         </ons-toolbar>
 
+
         <p style="text-align: center">
-            <ons-button modifier="light" ng-click="navi.popPage();">Pop</ons-button>
+            <img src="images/calendar.png" />
+        </p>
+
+
+        <ons-list>
+            <ons-list-header>Please select a hospital</ons-list-header>
+            <ons-list-item>Hospital One</ons-list-item>
+            <ons-list-item>Hospital Two</ons-list-item>
+            <ons-list-item>Hospital Three</ons-list-item>
+
+            <ons-list-header>Please select a type</ons-list-header>
+            <ons-list-item modifier="tappable">Type 1</ons-list-item>
+            <ons-list-item modifier="tappable">Type 2</ons-list-item>
+        </ons-list>
+
+        <p style="text-align: center">
+            <ons-button modifier="light" ng-click="navi.popPage();">Make Appointment</ons-button>
         </p>
     </ons-page>
 </ons-template>
@@ -164,11 +219,88 @@
             <div class="center">Advice</div>
         </ons-toolbar>
 
+
+        <ons-list>
+            <ons-list-header>Please describe your question</ons-list-header>
+            <ons-list-item><input value="Type here..." /></ons-list-item>
+            <ons-list-item>One</ons-list-item>
+            <ons-list-item>Two</ons-list-item>
+            <ons-list-item>Three</ons-list-item>
+
+            <ons-list-header>Select advice</ons-list-header>
+            <ons-list-item modifier="tappable">Tap Me</ons-list-item>
+            <ons-list-item modifier="tappable">Tap Me</ons-list-item>
+        </ons-list>
+
         <p style="text-align: center">
-            <ons-button modifier="light" ng-click="navi.popPage();">Pop</ons-button>
+            <ons-button modifier="light" ng-click="navi.popPage();">Seek for advice</ons-button>
         </p>
     </ons-page>
 </ons-template>
+
+
+
+<ons-template id="detail.html">
+    <ons-page ng-controller="DetailController">
+
+        <ons-toolbar>
+            <div class="left"><ons-back-button>Back</ons-back-button></div>
+            <div class="center">Details</div>
+        </ons-toolbar>
+
+        <ons-list modifier="inset" style="margin-top: 10px">
+            <ons-list-item class="item">
+                <ons-row>
+                    <ons-col width="60px">
+                        <div class="item-thum"></div>
+                    </ons-col>
+                    <ons-col>
+                        <header>
+                            <span class="item-title">{{item.title}}</span>
+                            <span class="item-label">{{item.label}}</span>
+                        </header>
+                        <p class="item-desc">{{item.desc}}</p>
+                    </ons-col>
+                </ons-row>
+            </ons-list-item>
+
+            <ons-list-item modifier="chevron" ng-click="navi.pushPage('payment.html')">
+                <ons-icon icon="ion-chatboxes" fixed-width="true" style="color: #ccc"></ons-icon>
+                Request for hard copy
+            </ons-list-item>
+        </ons-list>
+
+        <ons-list style="margin-top: 10px">
+            <ons-list-item class="item" ng-repeat="i in [1,2,3]">
+                <header>
+                    <span class="item-title">Lorem ipsum dolor sit amet</span>
+                </header>
+                <p class="item-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </ons-list-item>
+        </ons-list>
+
+        <br>
+
+    </ons-page>
+</ons-template>
+
+<ons-template id="payment.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Payment</div>
+        </ons-toolbar>
+
+
+        <p style="text-align: center">
+            <img src="images/paypal.jpg" />
+        </p>
+
+        <p style="text-align: center">
+            <ons-button modifier="light" ng-click="navi.popPage();">Pay</ons-button>
+        </p>
+    </ons-page>
+</ons-template>
+
 
 </body>
 </html>
